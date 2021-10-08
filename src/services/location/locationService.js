@@ -1,14 +1,10 @@
 import camelize from "camelize";
 
-import { locations } from "./locationsMock";
-
-export const locationRequest = (searchTerm) => {
-  return new Promise((resolve, reject) => {
-    const locationMock = locations[searchTerm];
-    if (!locationMock) {
-      reject("not found");
-    }
-    resolve(locationMock);
+export const locationRequest = async (searchTerm) => {
+  return fetch(
+    `https://us-central1-whatsappclone-6794f.cloudfunctions.net/geocode?city=${searchTerm}`
+  ).then((res) => {
+    return res.json();
   });
 };
 

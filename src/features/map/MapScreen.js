@@ -6,7 +6,7 @@ import { useLocationContext } from "../../services/location/locationContext";
 import { useRestaurantContext } from "../../services/restaurants/restaurantsContext";
 import MapCallout from "./MapCallout";
 
-const MapScreen = () => {
+const MapScreen = ({ navigation }) => {
   const { location } = useLocationContext();
   const { restaurants = [] } = useRestaurantContext();
   const { viewport, lat, lng } = location;
@@ -19,32 +19,47 @@ const MapScreen = () => {
   return (
     <View style={styles.container}>
       <Search />
-      <MapView
-        style={styles.map}
-        region={{
-          latitude: lat,
-          longitude: lng,
-          latitudeDelta: latDelta,
-          longitudeDelta: 0.02,
-        }}
-      >
-        {restaurants.map((restaurant) => {
-          return (
-            <MapView.Marker
-              key={restaurant.name}
-              title={restaurant.name}
-              coordinate={{
-                latitude: restaurant.geometry.location.lat,
-                longitude: restaurant.geometry.location.lng,
-              }}
-            >
-              <MapView.Callout>
-                <MapCallout restaurant={restaurant} />
-              </MapView.Callout>
-            </MapView.Marker>
-          );
-        })}
-      </MapView>
+      {location && (
+        <MapView
+          style={styles.map}
+          region={{
+            latitude: lat,
+            longitude: lng,
+            latitudeDelta: latDelta,
+            longitudeDelta: 0.02,
+          }}
+        >
+          {restaurants.map((restaurant) => {
+            return (
+              <MapView.Marker
+                key={restaurant.name}
+                title={restaurant.name}
+                coordinate={{
+                  latitude: restaurant.geometry.location.lat,
+                  longitude: restaurant.geometry.location.lng,
+                }}
+              >
+                <MapView.Callout
+                  onPress={() =>
+                    navigation.navigate("RestaurantDetails", { restaurant })
+                  }
+                >
+                  <MapCallout restaurant={restaurant} />
+                </MapView.Callout>
+              </MapView.Marker>
+            );
+          })}
+        </MapView>
+      )}
+      {!location && (
+        <MapView
+          style={styles.map}
+          region={{
+            latitude: 0,
+            longitude: 0,
+          }}
+        />
+      )}
     </View>
   );
 };

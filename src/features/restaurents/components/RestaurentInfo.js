@@ -2,6 +2,7 @@ import React from "react";
 import { View, Image } from "react-native";
 import StarIcon from "react-native-vector-icons/AntDesign";
 import { Text } from "../../../components/typography/TextComponent";
+
 import {
   RestaurentCard,
   RestaurentCardCover,
@@ -9,6 +10,7 @@ import {
   Address,
   Open,
 } from "./RestaurentInfoStyle";
+import Favorite from "../../Favorite";
 
 const RestaurentInfo = ({ restaurant }) => {
   const {
@@ -28,7 +30,8 @@ const RestaurentInfo = ({ restaurant }) => {
   }
   return (
     <View>
-      <RestaurentCard elevation={5}>
+      <RestaurentCard elevation={2}>
+        <Favorite restaurant={restaurant} />
         <RestaurentCardCover source={{ uri: photos[0] }} />
         <Info>
           <Text variant="label">{name}</Text>
