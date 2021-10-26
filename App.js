@@ -1,7 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme/index";
-import { Text } from "react-native";
 import {
   useFonts as useFontsOswald,
   Oswald_400Regular,
@@ -16,13 +15,13 @@ import { AuthenticationContextProvider } from "./src/services/authentication/aut
 import Navigation from "./src/infrastructure/navigation/Navigation";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDh_3_MuT_ybTXNzP1JWAaoy6u3HKIAz1M",
-  authDomain: "whatsappclone-6794f.firebaseapp.com",
-  projectId: "whatsappclone-6794f",
-  storageBucket: "whatsappclone-6794f.appspot.com",
-  messagingSenderId: "218929455563",
-  appId: "1:218929455563:web:ebbddde24a7d5ea71f164e",
-  measurementId: "G-TVL0420B23",
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: "",
 };
 
 if (!firebase.apps.length) {
